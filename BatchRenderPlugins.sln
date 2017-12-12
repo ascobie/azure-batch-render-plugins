@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{465620A1-3D6E-431A-A116-F7260C8D87F9}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGES.txt = CHANGES.txt
+		LICENSE.txt = LICENSE.txt
+		README.rst = README.rst
+	EndProjectSection
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Blender.Client", "Blender.Client\Blender.Client.pyproj", "{16D9E706-0005-4AC4-832C-D0403F6B8008}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16D9E706-0005-4AC4-832C-D0403F6B8008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D9E706-0005-4AC4-832C-D0403F6B8008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D86D121-EC20-4B21-B06F-F4AE95FEC7E9}
+	EndGlobalSection
+EndGlobal
