@@ -1,5 +1,4 @@
-﻿
-import bpy
+﻿import bpy
 import logging
 import webbrowser
 import os
@@ -18,14 +17,11 @@ class BatchSettings(object):
     pages = ["HOME", "ERROR"]
 
     def __init__(self):
-
         self.ops = self._register_ops()
         self.ui = self._register_ui()
         self.props = self._register_props()
         self.log = self._configure_logging()
-
         self.start()
-
 
     def _configure_logging(self):
         """

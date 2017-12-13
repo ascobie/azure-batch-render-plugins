@@ -17,7 +17,14 @@ _APP_DIR = os.path.dirname(__file__)
 
 from batched_blender.props.props_shared import BatchPreferences
 from batched_blender.shared import BatchSettings
-from batched_blender.draw import *
+from batched_blender.panel import BatchLabsBlenderPanel
+from batched_blender.menu import BatchLabsBlenderMenu
+
+classes = (
+    BatchPreferences,
+    BatchLabsBlenderPanel,
+    BatchLabsBlenderMenu,
+)
 
 @bpy.app.handlers.persistent
 def start_session(self):
@@ -47,28 +54,31 @@ def start_session(self):
         bpy.app.handlers.scene_update_post.remove(start_session)
 
 
+def menu_func(self, context):
+    self.layout.separator()
+    self.layout.menu("BatchLabsBlenderMenu")
+
+
 def register():
     """
     Register module and applicable classes.
-    This method also sets some Batch globals. In particular, the
-    python module Requests that is packaged with blender does not allow
-    for certificates to be verified, so we have to either turn this off,
-    or replace the included Requests module (recommended).
-
     Here we also register the User Preferences for the Addon, so it can
     be configured in the Blender User Preferences window.
     """
     bpy.app.handlers.scene_update_post.append(start_session)
     bpy.utils.register_class(BatchPreferences)
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(BatchLabsBlenderPanel)
+    bpy.utils.register_class(BatchLabsBlenderMenu)
+    #bpy.utils.register_module(__name__)
+    bpy.types.INFO_MT_render.append(menu_func)
 
 
 def unregister():
     """
     Unregister the addon if deselected from the User Preferences window.
     """
-    bpy.utils.unregister_module(__name__)
-
+    #bpy.utils.unregister_module(__name__)
+    bpy.types.INFO_MT_render.remove(menu_func)
 
 if __name__ == "__main__":
     register()

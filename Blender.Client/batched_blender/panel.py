@@ -1,7 +1,7 @@
 ﻿
 import bpy
 
-class Interface(bpy.types.Panel):
+class BatchLabsBlenderPanel(bpy.types.Panel):
     """
     Global Batch Blender Interface. Handles the separate UI
     definitions of all the submodules based on the session page.
@@ -12,7 +12,6 @@ class Interface(bpy.types.Panel):
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
     bl_context = "render"
-
 
     def label(self, label, row, align=None, icon=None, active=True):
         """
@@ -44,8 +43,7 @@ class Interface(bpy.types.Panel):
         row.enabled = active
 
 
-    def prop(self, data, prop, row, label="",align=None, active=True,
-             **kwargs):
+    def prop(self, data, prop, row, label="", align=None, active=True, **kwargs):
         """
         Display a Blender property.
 
@@ -141,4 +139,3 @@ class Interface(bpy.types.Panel):
         self.label("Plugin failed to load correctly", sublayout.row(align=True), "CENTER")
         self.label("Please see console for details.", sublayout.row(align=True), "CENTER")
         self.label("", sublayout)
-

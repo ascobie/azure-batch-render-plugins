@@ -26,7 +26,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="batched_blender\draw.py" />
-    <Compile Include="batched_blender\props\props_shared.py" />
     <Compile Include="batched_blender\shared.py" />
     <Compile Include="batched_blender\ui\ui_shared.py" />
     <Compile Include="batched_blender\utils.py" />
@@ -37,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="batched_blender\" />
-    <Folder Include="batched_blender\props\" />
     <Folder Include="batched_blender\ui\" />
   </ItemGroup>
   <!-- Uncomment the CoreCompile target to enable the Build command in
