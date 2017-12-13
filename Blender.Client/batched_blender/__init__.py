@@ -15,16 +15,10 @@ import bpy
 
 _APP_DIR = os.path.dirname(__file__)
 
-from batched_blender.props.props_shared import BatchPreferences
+from batched_blender.user_preferences import UserPreferences
 from batched_blender.shared import BatchSettings
 from batched_blender.panel import BatchLabsBlenderPanel
 from batched_blender.menu import BatchLabsBlenderMenu
-
-classes = (
-    BatchPreferences,
-    BatchLabsBlenderPanel,
-    BatchLabsBlenderMenu,
-)
 
 @bpy.app.handlers.persistent
 def start_session(self):
@@ -66,10 +60,9 @@ def register():
     be configured in the Blender User Preferences window.
     """
     bpy.app.handlers.scene_update_post.append(start_session)
-    bpy.utils.register_class(BatchPreferences)
+    bpy.utils.register_class(UserPreferences)
     bpy.utils.register_class(BatchLabsBlenderPanel)
     bpy.utils.register_class(BatchLabsBlenderMenu)
-    #bpy.utils.register_module(__name__)
     bpy.types.INFO_MT_render.append(menu_func)
 
 
@@ -77,7 +70,6 @@ def unregister():
     """
     Unregister the addon if deselected from the User Preferences window.
     """
-    #bpy.utils.unregister_module(__name__)
     bpy.types.INFO_MT_render.remove(menu_func)
 
 if __name__ == "__main__":

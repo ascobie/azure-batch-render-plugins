@@ -2,7 +2,7 @@
 import bpy
 import os
 
-class BatchPreferences(bpy.types.AddonPreferences):
+class UserPreferences(bpy.types.AddonPreferences):
     """BatchLabs Blender plugin user preferences."""
 
     bl_idname = __package__.split('.')[0]

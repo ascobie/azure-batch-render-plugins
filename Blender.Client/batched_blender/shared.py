@@ -68,7 +68,7 @@ class BatchSettings(object):
         Preferences.
 
         :Returns:
-            - :class:`.BatchPreferences`
+            - :class:`.UserPreferences`
         """
         props = bpy.context.user_preferences.addons[__package__].preferences
         if not os.path.isdir(props.log_dir):
