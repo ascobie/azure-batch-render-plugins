@@ -1,6 +1,7 @@
 ﻿import bpy
 import logging
 import webbrowser
+import subprocess
 import os
 
 from batched_blender.ui import ui_shared
@@ -134,7 +135,7 @@ class BatchSettings(object):
 
         bpy.context.scene.batch_session.log.debug("Submit job ... " + bpy.data.filepath)
         bpy.context.scene.batch_session.log.debug(bpy.context.scene)
-        # webbrowser.open("https://ms.portal.azure.com/", 2, True)
+        # webbrowser.open("https://ms.portal.azure.com/", 1, True)
         
         return {'FINISHED'}
 
@@ -155,8 +156,9 @@ class BatchSettings(object):
         """
 
         bpy.context.scene.batch_session.log.debug("Monitor jobs ... ")
-        # webbrowser.open("https://ms.portal.azure.com/", 2, True)
-        
+        webbrowser.open("ms-batchlabs://route/jobs", 1, True)
+        # subprocess.Popen(r'explorer /select, "ms-batchlabs://route/jobs"')
+
         return {'FINISHED'}
 
 
@@ -176,7 +178,7 @@ class BatchSettings(object):
         """
 
         bpy.context.scene.batch_session.log.debug("Monitor pools ... ")
-        # webbrowser.open("https://ms.portal.azure.com/", 2, True)
+        webbrowser.open("ms-batchlabs://route/pools", 1, True)
         
         return {'FINISHED'}
 
@@ -197,7 +199,7 @@ class BatchSettings(object):
         """
 
         bpy.context.scene.batch_session.log.debug("Download renders ... ")
-        # webbrowser.open("https://ms.portal.azure.com/", 2, True)
+        webbrowser.open("ms-batchlabs://route/data", 1, True)
         
         return {'FINISHED'}
 
