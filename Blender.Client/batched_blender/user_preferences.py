@@ -8,10 +8,10 @@ class UserPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__.split('.')[0]
 
     log_dir = bpy.props.StringProperty(
-            name="Log directory",
-            description="Location of log file",
-            subtype='DIR_PATH',
-            default=os.path.expanduser('~'))
+        name="Log directory",
+        description="Location of log file",
+        subtype='DIR_PATH',
+        default=os.path.expanduser('~'))
 
     log_level = bpy.props.EnumProperty(items=(('10', 'Debug', ''),
                                               ('20', 'Info', ''),
@@ -26,7 +26,8 @@ class UserPreferences(bpy.types.AddonPreferences):
         name="Batch Account",
         description="Fully qualified Batch account identifier. (/subscriptions/<sub-id>/resourceGroups/<resource-group>/providers/Microsoft.Batch/batchAccounts/<account>)",
         default="")
-    
+
+
     def draw(self, context):
         """
         Draw the display for the settings in the User Preferences

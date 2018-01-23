@@ -28,10 +28,11 @@ class BatchOps(object):
             return func(*args, **kwargs)
 
         except Exception as exp:
-            session.page = "ERROR"
             session.log.error("Error occurred: {0}".format(exp))
             session.redraw()
+
             return {'CANCELLED'}
+
 
     @staticmethod
     def register(name, label, execute=None, modal=None, invoke=None, **kwargs):
@@ -55,6 +56,7 @@ class BatchOps(object):
         """
         name = "batch_" + str(name)
         op_spec = {"bl_idname": name, "bl_label": label}
+        op_spec["job_type"] = ""
 
         if execute:
             def op_execute(self, context):
