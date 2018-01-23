@@ -1,4 +1,5 @@
 import bpy
+import logging
 import webbrowser
 
 class SubmitJobOperator(bpy.types.Operator):
@@ -6,7 +7,11 @@ class SubmitJobOperator(bpy.types.Operator):
     bl_label = "SubmitJobOperator"
     job_type = bpy.props.StringProperty()
 
+    def __init__(self):
+        self.log = logging.getLogger('batched_blender')
+
     def execute(self, context):
-        print("job_type:",self.job_type)
-        self.report({"INFO"}, "%s"%(self.job_type))
+        self.log.debug("SubmitJobOperator.execute: " + self.job_type)
+        #webbrowser.open("ms-batchlabs://route/market/blender/actions/render-movie-linux/submit", 1, True)
+
         return {"FINISHED"}

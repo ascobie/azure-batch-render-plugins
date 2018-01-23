@@ -18,8 +18,11 @@ from batched_blender.user_preferences import UserPreferences
 from batched_blender.shared import BatchSettings
 from batched_blender.menu import BatchLabsBlenderSubMenu
 from batched_blender.menu import BatchLabsBlenderMenu
+
+from batched_blender.op.download_renders_operator import DownloadRendersOperator
+from batched_blender.op.monitor_jobs_operator import MonitorJobsOperator
+from batched_blender.op.monitor_pools_operator import MonitorPoolsOperator
 from batched_blender.op.submit_job_operator import SubmitJobOperator
-#from batched_blender.menu import BatchLabsBlenderMenu
 
 @bpy.app.handlers.persistent
 def start_session(self):
@@ -62,6 +65,9 @@ def register():
     """
     bpy.app.handlers.scene_update_post.append(start_session)
     bpy.utils.register_class(UserPreferences)
+    bpy.utils.register_class(DownloadRendersOperator)
+    bpy.utils.register_class(MonitorPoolsOperator)
+    bpy.utils.register_class(MonitorJobsOperator)
     bpy.utils.register_class(SubmitJobOperator)
     bpy.utils.register_class(BatchLabsBlenderSubMenu)
     bpy.utils.register_class(BatchLabsBlenderMenu)

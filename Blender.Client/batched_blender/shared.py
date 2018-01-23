@@ -1,9 +1,6 @@
 ﻿import bpy
 import logging
-import webbrowser
 import os
-
-from batched_blender.utils import BatchOps
 
 class BatchSettings(object):
     """
@@ -15,7 +12,6 @@ class BatchSettings(object):
     def __init__(self):
         self.props = self._register_props()
         self.log = self._configure_logging()
-        self.ops = self._register_ops()
         self.log.debug("Initialised BatchLabs Blender plugin")
 
 
@@ -59,109 +55,6 @@ class BatchSettings(object):
         logger.addHandler(file_logging)
 
         return logger
-
-
-    def _register_ops(self):
-        """
-        Registers the shared operators with a batch_shared prefix.
-
-        :Returns:
-            - A list of the names (str) of the registered operators.
-        """
-        ops = []
-        #ops.append(BatchOps.register("shared.submit_job", "Submit Job", self._submit_job))
-        ops.append(BatchOps.register("shared.monitor_jobs", "Monitor Jobs", self._monitor_jobs))
-        ops.append(BatchOps.register("shared.monitor_pools", "Monitor Pools", self._monitor_pools))
-        ops.append(BatchOps.register("shared.download_renders", "Download Renders", self._download_renders))
-
-        return ops
-
-
-    def _submit_job(self, op, context):
-        """
-        The execute method for the shared._submit_job operator.
-
-        :Args:
-            - op (:class:`bpy.types.Operator`): An instance of the current
-              operator class.
-            - context (:class:`bpy.types.Context`): The current blender
-              context.
-
-        :Returns:
-            - Blender-specific value {'FINISHED'} to indicate the operator has
-              completed its action.
-        """
-
-        self.log.debug("Submit job ... " + bpy.data.filepath)
-        self.log.debug("op " + str(op))
-        self.log.debug("context " + str(context))
-        self.log.debug(bpy.context.scene)
-        # webbrowser.open("ms-batchlabs://route/market/blender/actions/render-movie-linux/submit", 1, True)
-
-        return {'FINISHED'}
-
-
-    def _monitor_jobs(self, op, context):
-        """
-        The execute method for the shared._monitor_jobs operator.
-
-        :Args:
-            - op (:class:`bpy.types.Operator`): An instance of the current
-              operator class.
-            - context (:class:`bpy.types.Context`): The current blender
-              context.
-
-        :Returns:
-            - Blender-specific value {'FINISHED'} to indicate the operator has
-              completed its action.
-        """
-
-        self.log.debug("Monitor jobs ... ")
-        webbrowser.open("ms-batchlabs://route/jobs", 1, True)
-
-        return {'FINISHED'}
-
-
-    def _monitor_pools(self, op, context):
-        """
-        The execute method for the shared._monitor_pools operator.
-
-        :Args:
-            - op (:class:`bpy.types.Operator`): An instance of the current
-              operator class.
-            - context (:class:`bpy.types.Context`): The current blender
-              context.
-
-        :Returns:
-            - Blender-specific value {'FINISHED'} to indicate the operator has
-              completed its action.
-        """
-
-        self.log.debug("Monitor pools ... ")
-        webbrowser.open("ms-batchlabs://route/pools", 1, True)
-
-        return {'FINISHED'}
-
-
-    def _download_renders(self, op, context):
-        """
-        The execute method for the shared._download_renders operator.
-
-        :Args:
-            - op (:class:`bpy.types.Operator`): An instance of the current
-              operator class.
-            - context (:class:`bpy.types.Context`): The current blender
-              context.
-
-        :Returns:
-            - Blender-specific value {'FINISHED'} to indicate the operator has
-              completed its action.
-        """
-
-        self.log.debug("Download renders ... ")
-        webbrowser.open("ms-batchlabs://route/data", 1, True)
-
-        return {'FINISHED'}
 
 
     def redraw(self):
