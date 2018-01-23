@@ -8,7 +8,7 @@ class SubmitJobOperator(bpy.types.Operator):
     job_type = bpy.props.StringProperty()
 
     def __init__(self):
-        self.log = logging.getLogger('batched_blender')
+        self.log = logging.getLogger("batched_blender")
 
     def execute(self, context):
         self.log.debug("SubmitJobOperator.execute: " + self.job_type)

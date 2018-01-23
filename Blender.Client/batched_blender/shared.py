@@ -12,7 +12,7 @@ class BatchSettings(object):
     def __init__(self):
         self.props = self._register_props()
         self.log = self._configure_logging()
-        self.log.debug("Initialised BatchLabs Blender plugin")
+        self.log.debug("Initialised BatchSettings")
 
 
     def _register_props(self):
@@ -41,7 +41,7 @@ class BatchSettings(object):
         Sets up a stream handler to log to Blenders console and a file
         handler to log to the Batch log file.
         """
-        logger = logging.getLogger('batched_blender')
+        logger = logging.getLogger("batched_blender")
         logger.setLevel(int(self.props.log_level))
         console_format = logging.Formatter("Batch: [%(levelname)s] %(message)s")
         file_format = logging.Formatter("%(asctime)-15s [%(levelname)s] %(module)s: %(message)s")
@@ -55,10 +55,3 @@ class BatchSettings(object):
         logger.addHandler(file_logging)
 
         return logger
-
-
-    def redraw(self):
-        """
-        Somewhat hacky way to force Blender to redraw the UI.
-        """
-        bpy.context.scene.objects.active = bpy.context.scene.objects.active

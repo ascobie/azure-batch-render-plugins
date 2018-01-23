@@ -7,7 +7,7 @@ class DownloadRendersOperator(bpy.types.Operator):
     bl_label = "DownloadRendersOperator"
 
     def __init__(self):
-        self.log = logging.getLogger('batched_blender')
+        self.log = logging.getLogger("batched_blender")
 
     def execute(self, context):
         self.log.debug("DownloadRendersOperator.execute")

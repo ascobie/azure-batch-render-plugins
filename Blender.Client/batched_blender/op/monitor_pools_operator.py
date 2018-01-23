@@ -7,7 +7,7 @@ class MonitorPoolsOperator(bpy.types.Operator):
     bl_label = "MonitorPoolsOperator"
 
     def __init__(self):
-        self.log = logging.getLogger('batched_blender')
+        self.log = logging.getLogger("batched_blender")
 
     def execute(self, context):
         self.log.debug("MonitorPoolsOperator.execute")

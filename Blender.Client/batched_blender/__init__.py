@@ -1,4 +1,8 @@
-﻿bl_info = {
+﻿import bpy
+import importlib
+import os
+
+bl_info = {
     "name": "BatchLabs Blender Plugin",
     "author": "Microsoft Corporation <bigcompute@microsoft.com>",
     "version": (0, 1, 0),
@@ -8,14 +12,11 @@
     "category": "Render"
 }
 
-import bpy
-import importlib
-import os
-
 _APP_DIR = os.path.dirname(__file__)
 
 from batched_blender.user_preferences import UserPreferences
 from batched_blender.shared import BatchSettings
+
 from batched_blender.menu import BatchLabsBlenderSubMenu
 from batched_blender.menu import BatchLabsBlenderMenu
 
@@ -53,6 +54,9 @@ def start_session(self):
 
 
 def menu_func(self, context):
+    """
+    Add the BatchLabs menu options to the 'Render' menu in the main toolbar
+    """
     self.layout.separator()
     self.layout.menu("BatchLabsBlenderMenu")
 
@@ -78,6 +82,13 @@ def unregister():
     """
     Unregister the addon if deselected from the User Preferences window.
     """
+    bpy.utils.unregister_class(UserPreferences)
+    bpy.utils.unregister_class(DownloadRendersOperator)
+    bpy.utils.unregister_class(MonitorPoolsOperator)
+    bpy.utils.unregister_class(MonitorJobsOperator)
+    bpy.utils.unregister_class(SubmitJobOperator)
+    bpy.utils.unregister_class(BatchLabsBlenderSubMenu)
+    bpy.utils.unregister_class(BatchLabsBlenderMenu)
     bpy.types.INFO_MT_render.remove(menu_func)
 
 if __name__ == "__main__":

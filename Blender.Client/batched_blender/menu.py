@@ -22,23 +22,23 @@ class BatchLabsBlenderSubMenu(bpy.types.Menu):
     bl_label = "Submit Job"
 
     def __init__(self):
-        self.log = logging.getLogger('batched_blender')
+        self.log = logging.getLogger("batched_blender")
 
 
     def draw(self, context):
         if len(_SUBMIT_MENU_OPTIONS) == 0:
             try:
                 self.init_menu_items()
-            except Exception as error:
+            except:
                 self.log.error("Failed to load job submit menu items")
+
+        self.log.debug("Showing submit job menu")
+        if len(_SUBMIT_MENU_OPTIONS) > 0:
+            for option in _SUBMIT_MENU_OPTIONS:
+                self.layout.operator("batch_shared.submit_job", text=option.name).job_type = option.key
         else:
-            self.log.debug("menu items not null")
-
-        self.log.debug("... about to show menu ...")
-        for option in _SUBMIT_MENU_OPTIONS:
-            self.layout.operator("batch_shared.submit_job", text=option.name).job_type=option.key
-
-        self.log.debug("Sub-menu drawn")
+            self.log.debug("Submit job menu empty")
+            self.log.debug("Check: https://raw.githubusercontent.com/Azure/BatchLabs-data/master/ncj/blender/index.json")
 
 
     def init_menu_items(self):
@@ -48,19 +48,19 @@ class BatchLabsBlenderSubMenu(bpy.types.Menu):
         try:
             response = urllib.request.urlopen("https://raw.githubusercontent.com/Azure/BatchLabs-data/master/ncj/blender/index.json")
         except HTTPError as error:
-            self.log.error("Failed to call the GitHub BatchLabs-data repository", str(error))
+            self.log.error("Failed to call the GitHub BatchLabs-data repository: " + str(error))
             raise
 
         try:
             str_response = response.read().decode("utf-8")
         except Exception as error:
-            self.log.error("An error occurred while reading the response", str(error))
+            self.log.error("An error occurred while reading the response: " + str(error))
             raise
 
         json_content = json.loads(str_response)
-        for entry in json_content:
-            self.log.debug("entry: " + str(entry))
-            _SUBMIT_MENU_OPTIONS.append(SubmitMenuOption(entry["id"], entry["name"]))
+        for action in json_content:
+            self.log.debug("Found action: " + str(action))
+            _SUBMIT_MENU_OPTIONS.append(SubmitMenuOption(action["id"], action["name"]))
 
 
 class BatchLabsBlenderMenu(bpy.types.Menu):
@@ -78,13 +78,12 @@ class BatchLabsBlenderMenu(bpy.types.Menu):
 
 
     def __init__(self):
-        self.log = logging.getLogger('batched_blender')
-        self.log.debug("Initializing main menu")
+        self.log = logging.getLogger("batched_blender")
 
 
     def draw(self, context):
         self.layout.menu("BATCH_LABS_submit_menu")
         self.layout.operator("batch_shared.download_renders", text="Download Renders")
-        self.layout.operator("batch_shared.monitor_pools", text="Monitor Pools")
         self.layout.operator("batch_shared.monitor_jobs", text="Monitor Jobs")
-        self.log.debug("Main menu drawn")
+        self.layout.operator("batch_shared.monitor_pools", text="Monitor Pools")
+        self.log.debug("BatchLabs menu shown")
