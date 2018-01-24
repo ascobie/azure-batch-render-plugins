@@ -4,6 +4,7 @@ import json
 import bpy
 
 from urllib.error import HTTPError
+from batched_blender.constants import Constants
 
 _SUBMIT_MENU_OPTIONS = []
 
@@ -12,18 +13,16 @@ class SubmitMenuOption:
         self.key = key
         self.name = name
 
-
 class BatchLabsBlenderSubMenu(bpy.types.Menu):
     """
     Submit job sub menu. Calls off to the BatchLabs-data repo to get the submit job
     option types and displays them.
     """
-    bl_idname = "BATCH_LABS_submit_menu"
-    bl_label = "Submit Job"
+    bl_idname = Constants.SUBMIT_MENU_ID
+    bl_label = Constants.SUBMIT_MENU_LABEL
 
     def __init__(self):
-        self.log = logging.getLogger("batched_blender")
-
+        self.log = logging.getLogger(Constants.LOG_NAME)
 
     def draw(self, context):
         if len(_SUBMIT_MENU_OPTIONS) == 0:
@@ -35,18 +34,17 @@ class BatchLabsBlenderSubMenu(bpy.types.Menu):
         self.log.debug("Showing submit job menu")
         if len(_SUBMIT_MENU_OPTIONS) > 0:
             for option in _SUBMIT_MENU_OPTIONS:
-                self.layout.operator("batch_shared.submit_job", text=option.name).job_type = option.key
+                self.layout.operator(Constants.OP_ID_SUBMIT_JOB, text=option.name).job_type = option.key
         else:
             self.log.debug("Submit job menu empty")
-            self.log.debug("Check: https://raw.githubusercontent.com/Azure/BatchLabs-data/master/ncj/blender/index.json")
-
+            self.log.debug("Check: " + Constants.DATA_REPO_APP_INDEX_URL)
 
     def init_menu_items(self):
         self.log.debug("Initializing submit menu items")
         del _SUBMIT_MENU_OPTIONS[:]
 
         try:
-            response = urllib.request.urlopen("https://raw.githubusercontent.com/Azure/BatchLabs-data/master/ncj/blender/index.json")
+            response = urllib.request.urlopen(Constants.DATA_REPO_APP_INDEX_URL)
         except HTTPError as error:
             self.log.error("Failed to call the GitHub BatchLabs-data repository: " + str(error))
             raise
@@ -74,16 +72,14 @@ class BatchLabsBlenderMenu(bpy.types.Menu):
         > Monitor Pools
         > Monitor Jobs
     """
-    bl_label = "Azure Batch Rendering"
-
+    bl_label = Constants.MAIN_MENU_LABEL
 
     def __init__(self):
-        self.log = logging.getLogger("batched_blender")
-
+        self.log = logging.getLogger(Constants.LOG_NAME)
 
     def draw(self, context):
-        self.layout.menu("BATCH_LABS_submit_menu")
-        self.layout.operator("batch_shared.download_renders", text="Download Renders")
-        self.layout.operator("batch_shared.monitor_jobs", text="Monitor Jobs")
-        self.layout.operator("batch_shared.monitor_pools", text="Monitor Pools")
+        self.layout.menu(Constants.SUBMIT_MENU_ID)
+        self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS, text="Download Renders")
+        self.layout.operator(Constants.OP_ID_MONITOR_JOBS, text="Monitor Jobs")
+        self.layout.operator(Constants.OP_ID_MONITOR_POOLS, text="Monitor Pools")
         self.log.debug("BatchLabs menu shown")

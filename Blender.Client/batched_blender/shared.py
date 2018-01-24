@@ -2,6 +2,8 @@
 import logging
 import os
 
+from batched_blender.constants import Constants
+
 class BatchSettings(object):
     """
     Initializes and manages the BatchLabs plugin session.
@@ -41,7 +43,7 @@ class BatchSettings(object):
         Sets up a stream handler to log to Blenders console and a file
         handler to log to the Batch log file.
         """
-        logger = logging.getLogger("batched_blender")
+        logger = logging.getLogger(Constants.LOG_NAME)
         logger.setLevel(int(self.props.log_level))
         console_format = logging.Formatter("Batch: [%(levelname)s] %(message)s")
         file_format = logging.Formatter("%(asctime)-15s [%(levelname)s] %(module)s: %(message)s")
