@@ -14,7 +14,7 @@ bl_info = {
 
 _APP_DIR = os.path.dirname(__file__)
 
-from batched_blender.user_preferences import UserPreferences
+from batched_blender.preferences import UserPreferences
 from batched_blender.shared import BatchSettings
 
 from batched_blender.menu import BatchLabsBlenderSubMenu

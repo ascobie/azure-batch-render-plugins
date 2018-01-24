@@ -1,5 +1,4 @@
-﻿
-import bpy
+﻿import bpy
 import os
 
 class UserPreferences(bpy.types.AddonPreferences):

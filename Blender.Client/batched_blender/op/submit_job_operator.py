@@ -12,6 +12,8 @@ class SubmitJobOperator(bpy.types.Operator):
 
     def execute(self, context):
         self.log.debug("SubmitJobOperator.execute: " + self.job_type)
+        self.log.debug("filepath: " + bpy.data.filepath)
+        self.log.debug("scene: " + str(bpy.context.scene))
         #webbrowser.open("ms-batchlabs://route/market/blender/actions/render-movie-linux/submit", 1, True)
 
         return {"FINISHED"}

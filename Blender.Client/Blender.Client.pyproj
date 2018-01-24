@@ -26,11 +26,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="batched_blender\menu.py" />
-    <Compile Include="batched_blender\panel.py" />
+    <Compile Include="batched_blender\op\download_renders_operator.py" />
+    <Compile Include="batched_blender\op\monitor_jobs_operator.py" />
+    <Compile Include="batched_blender\op\monitor_pools_operator.py" />
+    <Compile Include="batched_blender\op\submit_job_operator.py" />
     <Compile Include="batched_blender\shared.py" />
-    <Compile Include="batched_blender\ui\ui_shared.py" />
-    <Compile Include="batched_blender\user_preferences.py" />
-    <Compile Include="batched_blender\utils.py" />
+    <Compile Include="batched_blender\preferences.py" />
     <Compile Include="batched_blender\__init__.py" />
     <Compile Include="package.py">
       <SubType>Code</SubType>
@@ -38,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="batched_blender\" />
-    <Folder Include="batched_blender\ui\" />
+    <Folder Include="batched_blender\op\" />
   </ItemGroup>
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
