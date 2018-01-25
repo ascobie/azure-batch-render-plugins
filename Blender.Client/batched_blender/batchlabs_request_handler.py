@@ -55,16 +55,19 @@ class BatchLabsRequestHandler(object):
         try:
             response = urllib.request.urlopen(Constants.DATA_REPO_APP_INDEX_URL)
         except HTTPError as error:
-            self._logger.error("Failed to call the GitHub BatchLabs-data repository: " + str(error))
+            self._logger.error("Failed to call the GitHub BatchLabs-data "
+                               "repository: {}".format(str(error)))
             raise
 
         try:
             str_response = response.read().decode("utf-8")
         except Exception as error:
-            self._logger.error("An error occurred while reading the response: " + str(error))
+            self._logger.error("An error occurred while reading the response:"
+                               " {}".format(str(error)))
             raise
 
         json_content = json.loads(str_response)
         for action in json_content:
             self._logger.debug("Found action: " + str(action))
-            self._submit_actions.append(SubmitMenuOption(action["id"], action["name"]))
+            self._submit_actions.append(SubmitMenuOption(action["id"],
+                                                         action["name"]))

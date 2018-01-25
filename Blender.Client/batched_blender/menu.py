@@ -3,6 +3,7 @@ import bpy
 
 from batched_blender.constants import Constants
 
+
 class BatchLabsBlenderSubMenu(bpy.types.Menu):
     """
     Submit job sub menu. Calls off to the BatchLabs-data repo to get the submit job
@@ -17,11 +18,12 @@ class BatchLabsBlenderSubMenu(bpy.types.Menu):
     def draw(self, context):
         self.log.debug("Showing submit job menu")
         submit_actions = context.scene.batch_session.request_handler.menu_options()
-        
+
         self.log.debug("submit_actions: " + str(len(submit_actions)))
         if len(submit_actions) > 0:
             for option in submit_actions:
-                self.layout.operator(Constants.OP_ID_SUBMIT_JOB, text=option.name).job_type = option.key
+                self.layout.operator(Constants.OP_ID_SUBMIT_JOB,
+                                     text=option.name).job_type = option.key
         else:
             self.log.debug("Submit job menu empty")
             self.log.debug("Check: " + Constants.DATA_REPO_APP_INDEX_URL)
@@ -45,7 +47,9 @@ class BatchLabsBlenderMenu(bpy.types.Menu):
 
     def draw(self, context):
         self.layout.menu(Constants.SUBMIT_MENU_ID)
-        self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS, text="Download Renders")
+        self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS,
+                             text="Download Renders")
         self.layout.operator(Constants.OP_ID_MONITOR_JOBS, text="Monitor Jobs")
-        self.layout.operator(Constants.OP_ID_MONITOR_POOLS, text="Monitor Pools")
+        self.layout.operator(Constants.OP_ID_MONITOR_POOLS,
+                             text="Monitor Pools")
         self.log.debug("BatchLabs menu shown")

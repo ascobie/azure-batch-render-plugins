@@ -6,6 +6,7 @@ import uuid
 from batched_blender.batchlabs_request_handler import BatchLabsRequestHandler
 from batched_blender.constants import Constants
 
+
 class BatchSettings(object):
     """
     Initializes and manages the BatchLabs plugin session.
@@ -17,11 +18,12 @@ class BatchSettings(object):
         self.session_id = uuid.uuid4()
         self.props = self._register_props()
         self.log = self._configure_logging()
-        self.request_handler = BatchLabsRequestHandler(self.session_id, self.log)
+        self.request_handler = BatchLabsRequestHandler(self.session_id,
+                                                       self.log)
         self.log.debug("Initialised BatchSettings")
 
-
-    def _register_props(self):
+    @staticmethod
+    def _register_props():
         """
         Retrieves the shared addon properties - in this case the User
         Preferences.
@@ -36,10 +38,10 @@ class BatchSettings(object):
             except:
                 raise EnvironmentError(
                     "Data directory not created at '{0}'.\n"
-                    "Please ensure you have adequate permissions.".format(props.log_dir))
+                    "Please ensure you have adequate permissions.".format(
+                        props.log_dir))
 
         return props
-
 
     def _configure_logging(self):
         """
@@ -50,11 +52,13 @@ class BatchSettings(object):
         logger = logging.getLogger(Constants.LOG_NAME)
         logger.setLevel(int(self.props.log_level))
         console_format = logging.Formatter("Batch: [%(levelname)s] %(message)s")
-        file_format = logging.Formatter("%(asctime)-15s [%(levelname)s] %(module)s: %(message)s")
+        file_format = logging.Formatter(
+            "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s")
 
         console_logging = logging.StreamHandler()
         console_logging.setFormatter(console_format)
         logger.addHandler(console_logging)
+
         logfile = os.path.join(self.props.log_dir, "batched_blender.log")
         file_logging = logging.FileHandler(logfile)
         file_logging.setFormatter(file_format)
