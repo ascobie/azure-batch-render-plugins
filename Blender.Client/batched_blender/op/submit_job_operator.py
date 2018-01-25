@@ -1,6 +1,5 @@
 import bpy
 import logging
-import webbrowser
 
 from batched_blender.constants import Constants
 
@@ -17,9 +16,10 @@ class SubmitJobOperator(bpy.types.Operator):
         self.log.debug("SubmitJobOperator.execute: " + self.job_type)
         self.log.debug("filepath: " + bpy.data.filepath)
         self.log.debug("scene: " + str(bpy.context.scene))
-        launch_url = str.format("{}/market/blender/actions/{}/{}", Constants.BATCH_LABS_BASE_URL, self.job_type, "submit")
-        self.log.debug("launching: " + launch_url)
 
-        webbrowser.open(launch_url, 1, True)
+        handler = context.scene.batch_session.request_handler
+        launch_url = str.format("market/blender/actions/{}/{}", self.job_type, "submit")
+        
+        handler.call_batch_labs(launch_url)
 
         return {"FINISHED"}

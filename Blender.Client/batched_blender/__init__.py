@@ -57,6 +57,8 @@ def menu_func(self, context):
     """
     Add the BatchLabs menu options to the 'Render' menu in the main toolbar
     """
+    # todo: remove print()
+    print("session_id: " + str(context.scene.batch_session.session_id))
     self.layout.separator()
     self.layout.menu("BatchLabsBlenderMenu")
 

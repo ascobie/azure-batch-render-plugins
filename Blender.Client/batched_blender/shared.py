@@ -1,7 +1,9 @@
 ﻿import bpy
 import logging
 import os
+import uuid
 
+from batched_blender.batchlabs_request_handler import BatchLabsRequestHandler
 from batched_blender.constants import Constants
 
 class BatchSettings(object):
@@ -12,8 +14,10 @@ class BatchSettings(object):
     """
 
     def __init__(self):
+        self.session_id = uuid.uuid4()
         self.props = self._register_props()
         self.log = self._configure_logging()
+        self.request_handler = BatchLabsRequestHandler(self.session_id, self.log)
         self.log.debug("Initialised BatchSettings")
 
 

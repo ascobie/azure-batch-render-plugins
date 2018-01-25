@@ -1,6 +1,5 @@
 import bpy
 import logging
-import webbrowser
 
 from batched_blender.constants import Constants
 
@@ -13,6 +12,7 @@ class MonitorPoolsOperator(bpy.types.Operator):
 
     def execute(self, context):
         self.log.debug("MonitorPoolsOperator.execute")
-        webbrowser.open(str.format("{}/{}", Constants.BATCH_LABS_BASE_URL, "pools"), 1, True)
+        handler = context.scene.batch_session.request_handler
+        handler.call_batch_labs("pools")
 
         return {"FINISHED"}
