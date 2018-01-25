@@ -1,6 +1,7 @@
 ﻿import bpy
 import os
 
+
 class UserPreferences(bpy.types.AddonPreferences):
     """BatchLabs Blender plugin user preferences."""
 
@@ -23,9 +24,10 @@ class UserPreferences(bpy.types.AddonPreferences):
 
     account = bpy.props.StringProperty(
         name="Batch Account",
-        description="Fully qualified Batch account identifier. (/subscriptions/<sub-id>/resourceGroups/<resource-group>/providers/Microsoft.Batch/batchAccounts/<account>)",
+        description="Fully qualified Batch account identifier."
+                    " (/subscriptions/<sub-id>/resourceGroups/<resource-group>/"
+                    "providers/Microsoft.Batch/batchAccounts/<account>)",
         default="")
-
 
     def draw(self, context):
         """
@@ -38,7 +40,8 @@ class UserPreferences(bpy.types.AddonPreferences):
 
         """
         layout = self.layout
-        layout.label(text="Blender will need to be restarted for changes to take effect.")
+        layout.label(text="Blender will need to be restarted for changes to "
+                          "take effect.")
 
         layout.label(text="")
         layout.label(text="Log Settings")

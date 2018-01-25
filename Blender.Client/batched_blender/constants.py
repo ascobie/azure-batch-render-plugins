@@ -10,7 +10,8 @@ class Constants:
     LOG_NAME = "batched_blender"
 
     # External URL's
-    DATA_REPO_APP_INDEX_URL = "https://raw.githubusercontent.com/Azure/BatchLabs-data/master/ncj/blender/index.json"
+    DATA_REPO_APP_INDEX_URL = "https://raw.githubusercontent.com/Azure/BatchLabs" \
+                              "-data/master/ncj/blender/index.json"
     BATCH_LABS_BASE_URL = "ms-batchlabs://route"
 
     # Operation keys
