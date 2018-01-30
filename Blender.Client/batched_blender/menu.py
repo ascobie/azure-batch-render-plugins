@@ -47,9 +47,7 @@ class BatchLabsBlenderMenu(bpy.types.Menu):
 
     def draw(self, context):
         self.layout.menu(Constants.SUBMIT_MENU_ID)
-        self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS,
-                             text="Download Renders")
+        self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS, text="Manage Data")
         self.layout.operator(Constants.OP_ID_MONITOR_JOBS, text="Monitor Jobs")
-        self.layout.operator(Constants.OP_ID_MONITOR_POOLS,
-                             text="Monitor Pools")
+        self.layout.operator(Constants.OP_ID_MONITOR_POOLS, text="Monitor Pools")
         self.log.debug("BatchLabs menu shown")
