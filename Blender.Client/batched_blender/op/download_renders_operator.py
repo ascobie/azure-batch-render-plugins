@@ -1,5 +1,6 @@
-import bpy
 import logging
+
+import bpy
 
 from batched_blender.constants import Constants
 

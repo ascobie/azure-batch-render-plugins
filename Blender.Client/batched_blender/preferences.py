@@ -1,6 +1,6 @@
-﻿import bpy
-import os
+﻿import os
 
+import bpy
 
 class UserPreferences(bpy.types.AddonPreferences):
     """BatchLabs Blender plugin user preferences."""

@@ -1,7 +1,8 @@
-﻿import bpy
-import logging
+﻿import logging
 import os
 import uuid
+
+import bpy
 
 from batched_blender.batchlabs_request_handler import BatchLabsRequestHandler
 from batched_blender.constants import Constants
@@ -19,9 +20,14 @@ class BatchSettings(object):
         self.props = self._register_props()
         self.log = self._configure_logging()
         self.request_handler = BatchLabsRequestHandler(self.session_id,
-                                                       self.log)
-        self.log.debug("Initialised BatchSettings")
+                                                       self.log,
+                                                       self.props)
+        self.log.info("Initialised BatchSettings")
 
+    @staticmethod
+    def get_user_preferences():
+        return bpy.context.user_preferences.addons[__package__].preferences
+    
     @staticmethod
     def _register_props():
         """
@@ -31,7 +37,7 @@ class BatchSettings(object):
         :Returns:
             - :class:`.UserPreferences`
         """
-        props = bpy.context.user_preferences.addons[__package__].preferences
+        props = BatchSettings.get_user_preferences()
         if not os.path.isdir(props.log_dir):
             try:
                 os.mkdir(props.log_dir)

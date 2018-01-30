@@ -1,12 +1,11 @@
-﻿import bpy
-import json
-import os
+﻿import json
 import urllib.request
-import uuid
+from urllib.error import HTTPError
 import webbrowser
 
+import bpy
+
 from batched_blender.constants import Constants
-from urllib.error import HTTPError
 
 class SubmitMenuOption:
     def __init__(self, key, name):
@@ -20,14 +19,16 @@ class BatchLabsRequestHandler(object):
     _session_id = None
     _submit_actions = []
     _logger = None
+    _preferences = None
 
-    def __init__(self, session_id, logger):
+    def __init__(self, session_id, logger, preferences):
         print("BatchLabsRequestHandler init")
         self._session_id = session_id
         self._logger = logger
+        self._preferences = preferences
 
         self._load_menu_options()
-        self._logger.debug("Initialised BatchLabsRequestHandler")
+        self._logger.info("Initialised BatchLabsRequestHandler with session_id: " + str(session_id))
 
     def menu_options(self):
         return self._submit_actions
@@ -39,10 +40,17 @@ class BatchLabsRequestHandler(object):
             action_str,
             self._session_id)
 
+        # add accountId is we have one in user settings
+        if self._preferences.account:
+            batchlabs_url = str.format("{}&accountId={}", batchlabs_url, self._preferences.account)
+
         # todo: append any dictionary arguments
         self._logger.debug("Calling labs with URL: " + batchlabs_url)
+        
+        if argument_dict:
+            self._logger.debug("Has dict: " + str(argument_dict))
 
-        webbrowser.open(batchlabs_url, 1, True)
+        # webbrowser.open(batchlabs_url, 1, True)
 
     def _load_menu_options(self):
         """

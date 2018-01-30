@@ -1,5 +1,4 @@
-﻿
-class Constants:
+﻿class Constants:
     """
     Class for holding globally used constants.
     """

@@ -25,8 +25,8 @@ class BatchLabsBlenderSubMenu(bpy.types.Menu):
                 self.layout.operator(Constants.OP_ID_SUBMIT_JOB,
                                      text=option.name).job_type = option.key
         else:
-            self.log.debug("Submit job menu empty")
-            self.log.debug("Check: " + Constants.DATA_REPO_APP_INDEX_URL)
+            self.log.warn("Submit job menu empty")
+            self.log.warn("Check: " + Constants.DATA_REPO_APP_INDEX_URL)
 
 
 class BatchLabsBlenderMenu(bpy.types.Menu):
@@ -50,4 +50,4 @@ class BatchLabsBlenderMenu(bpy.types.Menu):
         self.layout.operator(Constants.OP_ID_DOWNLOAD_RENDERS, text="Manage Data")
         self.layout.operator(Constants.OP_ID_MONITOR_JOBS, text="Monitor Jobs")
         self.layout.operator(Constants.OP_ID_MONITOR_POOLS, text="Monitor Pools")
-        self.log.debug("BatchLabs menu shown")
+        self.log.info("BatchLabs menu shown")

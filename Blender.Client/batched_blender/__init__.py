@@ -1,6 +1,7 @@
-﻿import bpy
-import importlib
+﻿import importlib
 import os
+
+import bpy
 
 bl_info = {
     "name": "BatchLabs Blender Plugin",
