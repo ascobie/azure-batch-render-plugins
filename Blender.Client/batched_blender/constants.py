@@ -18,3 +18,6 @@
     OP_ID_MONITOR_JOBS = "batch_shared.monitor_jobs"
     OP_ID_MONITOR_POOLS = "batch_shared.monitor_pools"
     OP_ID_SUBMIT_JOB = "batch_shared.submit_job"
+
+    #Dictionary keys
+    SUBMIT_JOB_DICT_SCENE_FILE = "blendFile"

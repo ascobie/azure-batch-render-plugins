@@ -44,13 +44,13 @@ class BatchLabsRequestHandler(object):
         if self._preferences.account:
             batchlabs_url = str.format("{}&accountId={}", batchlabs_url, self._preferences.account)
 
-        # todo: append any dictionary arguments
-        self._logger.debug("Calling labs with URL: " + batchlabs_url)
-        
+        # add any other parameters that were passed in via the argument_dict
         if argument_dict:
-            self._logger.debug("Has dict: " + str(argument_dict))
+            for key, value in argument_dict.items():
+                batchlabs_url = "{}&{}={}".format(batchlabs_url, key, value)
 
-        # webbrowser.open(batchlabs_url, 1, True)
+        self._logger.debug("Calling labs with URL: " + batchlabs_url)
+        webbrowser.open(batchlabs_url, 1, True)
 
     def _load_menu_options(self):
         """

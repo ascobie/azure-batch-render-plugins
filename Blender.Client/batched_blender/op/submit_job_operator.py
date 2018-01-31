@@ -1,4 +1,5 @@
 import logging
+import os
 
 import bpy
 
@@ -21,6 +22,8 @@ class SubmitJobOperator(bpy.types.Operator):
         if not bpy.data.filepath:
             handler.call_batch_labs(launch_url)
         else:
-            handler.call_batch_labs(launch_url, {"filepath": bpy.data.filepath})
+            handler.call_batch_labs(
+                launch_url,
+                {Constants.SUBMIT_JOB_DICT_SCENE_FILE: os.path.basename(bpy.data.filepath)})
 
         return {"FINISHED"}
