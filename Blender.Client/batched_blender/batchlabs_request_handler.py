@@ -34,10 +34,11 @@ class BatchLabsRequestHandler(object):
 
     def call_batch_labs(self, action_str, argument_dict=None):
         batchlabs_url = str.format(
-            "{}/{}?session={}",
+            "{}/{}?session={}&useAutoPool={}",
             Constants.BATCH_LABS_BASE_URL,
             action_str,
-            self._session_id)
+            self._session_id,
+            self._preferences.pool_type)
 
         # add accountId is we have one in user settings
         if self._preferences.account:
