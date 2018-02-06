@@ -22,7 +22,6 @@ class BatchLabsRequestHandler(object):
     _preferences = None
 
     def __init__(self, session_id, logger, preferences):
-        print("BatchLabsRequestHandler init")
         self._session_id = session_id
         self._logger = logger
         self._preferences = preferences

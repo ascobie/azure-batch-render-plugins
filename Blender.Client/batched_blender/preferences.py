@@ -29,6 +29,12 @@ class UserPreferences(bpy.types.AddonPreferences):
                     "providers/Microsoft.Batch/batchAccounts/<account>)",
         default="")
 
+    pool_type = bpy.props.EnumProperty(items=(('0', 'Pre-existing pool', ''),
+                                              ('1', 'Auto-pool', '')),
+                                       name="Pool Type",
+                                       description="Type of pool to use when submitting a job",
+                                       default="0")
+
     def draw(self, context):
         """
         Draw the display for the settings in the User Preferences
@@ -51,3 +57,4 @@ class UserPreferences(bpy.types.AddonPreferences):
         layout.label(text="")
         layout.label(text="Account Settings")
         layout.prop(self, "account")
+        layout.prop(self, "pool_type")
