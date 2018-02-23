@@ -32,17 +32,20 @@ class BatchLabsRequestHandler(object):
     def menu_options(self):
         return self._submit_actions
 
-    def call_batch_labs(self, action_str, argument_dict=None):
+    def call_batch_labs(self, action_str, argument_dict={}):
         batchlabs_url = str.format(
-            "{}/{}?session={}&useAutoPool={}",
+            "{}/{}?session={}",
             Constants.BATCH_LABS_BASE_URL,
             action_str,
-            self._session_id,
-            self._preferences.pool_type)
+            self._session_id)
 
-        # add accountId is we have one in user settings
+        # initialize if not already
+        if not argument_dict:
+            argument_dict = {}
+
+        # add accountId if we have one in user settings
         if self._preferences.account:
-            batchlabs_url = str.format("{}&accountId={}", batchlabs_url, self._preferences.account)
+            argument_dict[Constants.KEY_ACCOUNT_ID] =  self._preferences.account
 
         # add any other parameters that were passed in via the argument_dict
         if argument_dict:

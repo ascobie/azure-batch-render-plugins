@@ -19,5 +19,7 @@
     OP_ID_MONITOR_POOLS = "batch_shared.monitor_pools"
     OP_ID_SUBMIT_JOB = "batch_shared.submit_job"
 
-    #Dictionary keys
-    SUBMIT_JOB_DICT_SCENE_FILE = "blendFile"
+    # Dictionary keys
+    KEY_SCENE_FILE = "blendFile"
+    KEY_USE_AUTO_POOL = "useAutoPool"
+    KEY_ACCOUNT_ID = "accountId"
