@@ -6,7 +6,7 @@ VERSION = "0.2.0"
 def main():
     """Build Blender Plugin"""
 
-    print("Building plugin ...")
+    print("Building BatchLabs Blender plugin ...")
 
     package_dir = os.path.abspath("build")
     print("package_dir: " + package_dir)
@@ -27,7 +27,9 @@ def main():
                 continue
 
             for file in files:
-                blend_zip.write(os.path.relpath(os.path.join(root, file)))
+                pathToFile = os.path.relpath(os.path.join(root, file))
+                print("Adding ... " + pathToFile)
+                blend_zip.write(pathToFile)
 
     print("Package complete!")
 
